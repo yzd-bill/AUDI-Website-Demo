@@ -1,0 +1,73 @@
+:root {
+  /* 黑色系 */
+  --black-pure: #000000;
+  --black-carbon: #0a0a0a;
+  --black-ink: #111111;
+  --black-deep: #1a1a1a;
+  --black-border: #2a2a2a;
+
+  /* 橙色强调色 */
+  --orange-vibrant: #ff6b35;
+  --orange-flame: #ff4500;
+  --orange-dark: #cc5500;
+  --orange-glow: rgba(255, 107, 53, 0.3);
+  --orange-glow-light: rgba(255, 107, 53, 0.1);
+  --orange-glow-subtle: rgba(255, 107, 53, 0.05);
+
+  /* 灰色系 */
+  --gray-silver: #888888;
+  --gray-light: #666666;
+  --gray-dark: #444444;
+
+  /* 白色系 */
+  --white-pure: #ffffff;
+  --white-off: rgba(255, 255, 255, 0.9);
+  --white-muted: rgba(255, 255, 255, 0.6);
+  --white-subtle: rgba(255, 255, 255, 0.1);
+  --white-glow: rgba(255, 255, 255, 0.05);
+
+  /* 字体 */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+
+  /* 字重 */
+  --font-thin: 100;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-black: 900;
+
+  /* 间距 */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* 过渡 */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+  --transition-slower: 800ms ease;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* 阴影 */
+  --shadow-glow: 0 0 30px var(--orange-glow-light);
+  --shadow-glow-strong: 0 0 60px var(--orange-glow);
+}
