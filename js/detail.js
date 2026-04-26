@@ -2,12 +2,26 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ========== 翻译系统 ==========
   const translations = {
+    // 导航栏
+    'nav-models': { zh: '车型', en: 'Models' },
+    'nav-about': { zh: '关于', en: 'About' },
+    'tab-sports': { zh: '跑车', en: 'Sports' },
+    'tab-sedan': { zh: '轿车', en: 'Sedan' },
+    'tab-suv': { zh: 'SUV', en: 'SUV' },
+    'tab-electric': { zh: '纯电', en: 'Electric' },
+    'tab-f1': { zh: 'F1', en: 'F1' },
+    // Footer
+    'footer-privacy': { zh: '隐私政策', en: 'Privacy Policy' },
+    'footer-terms': { zh: '使用条款', en: 'Terms of Use' },
+    'footer-contact': { zh: '联系我们', en: 'Contact Us' },
+    'footer-join': { zh: '加入我们', en: 'Join Us' },
+    'copyright': { zh: '© 2026 AUDI Motors. All rights reserved. 京ICP备XXXXXXXX号', en: '© 2026 AUDI Motors. All rights reserved. ICP Beijing XXXXXXXX' },
     // 视图按钮
     'view-front': { zh: '前视图', en: 'Front View' },
     'view-back': { zh: '后视图', en: 'Rear View' },
     'view-left': { zh: '左前视图', en: 'Left View' },
     'view-right': { zh: '右后视图', en: 'Right View' },
-    // 参数标签
+    // 参数标题和标签
     'specs-title': { zh: '车型参数', en: 'Model Specs' },
     'spec-launchDate': { zh: '推出时间', en: 'Launch Year' },
     'spec-topSpeed': { zh: '最高速度', en: 'Top Speed' },
