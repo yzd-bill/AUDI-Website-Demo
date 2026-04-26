@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AUDI Motors - 车型详情">
+  <title>AUDI Motors | 车型详情</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/detail.css">
+</head>
+<body class="page-gradient">
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">BIU<span>BIU</span></a>
+    <ul class="nav-links">
+      <li class="nav-item-dropdown">
+        <a href="#" class="nav-link" data-i18n="nav-models">车型</a>
+        <div class="dropdown-menu">
+          <a href="detail.html?type=sports" class="dropdown-link" data-i18n="tab-sports">跑车</a>
+          <a href="detail.html?type=sedan" class="dropdown-link" data-i18n="tab-sedan">轿车</a>
+          <a href="detail.html?type=suv" class="dropdown-link" data-i18n="tab-suv">SUV</a>
+          <a href="detail.html?type=electric" class="dropdown-link" data-i18n="tab-electric">纯电</a>
+          <a href="detail.html?type=f1" class="dropdown-link" data-i18n="tab-f1">F1</a>
+        </div>
+      </li>
+      <li><a href="index.html#philosophy" class="nav-link" data-i18n="nav-about">关于</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <span class="lang-btn active" data-lang="zh">CN</span>
+      <span class="lang-divider">|</span>
+      <span class="lang-btn" data-lang="en">EN</span>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="model-detail">
+
+    <!-- 1. 横向滚动的车型名列表 -->
+    <section class="model-selector">
+      <div class="model-list-container">
+        <div class="model-list">
+          <!-- 由 JS 动态生成 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 3D模型展示区 -->
+    <section class="model-viewer">
+      <div class="view-controls">
+        <button class="view-btn active" data-view="front" data-i18n="view-front">前视图</button>
+        <button class="view-btn" data-view="back" data-i18n="view-back">后视图</button>
+        <button class="view-btn" data-view="left" data-i18n="view-left">左前视图</button>
+        <button class="view-btn" data-view="right" data-i18n="view-right">右后视图</button>
+      </div>
+      <div class="model-image-container">
+        <div class="model-background-title"></div>
+        <img class="model-image" src="" alt="车型视图">
+      </div>
+    </section>
+
+    <!-- 3. 参数展示区 -->
+    <section class="model-specs">
+      <h2 class="specs-title" data-i18n="specs-title">车型参数</h2>
+      <div class="specs-grid">
+        <!-- 由 JS 动态生成 -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">BIU<span>BIU</span></div>
+      <ul class="footer-links">
+        <li><a href="#" class="footer-link" data-i18n="footer-privacy">隐私政策</a></li>
+        <li><a href="#" class="footer-link" data-i18n="footer-terms">使用条款</a></li>
+        <li><a href="#" class="footer-link" data-i18n="footer-contact">联系我们</a></li>
+        <li><a href="#" class="footer-link" data-i18n="footer-join">加入我们</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="copyright">&copy; 2026 AUDI Motors. All rights reserved. 京ICP备XXXXXXXX号</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/models-data.js"></script>
+  <script src="js/detail.js"></script>
+</body>
+</html>

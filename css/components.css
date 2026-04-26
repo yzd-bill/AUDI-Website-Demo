@@ -64,6 +64,75 @@
   width: 100%;
 }
 
+/* ========== Navigation Dropdown ========== */
+.nav-item-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 0;
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.nav-item-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-link {
+  display: block;
+  padding: 10px 24px;
+  font-size: 0.875rem;
+  color: var(--white-muted);
+  transition: all 0.2s ease;
+}
+
+.dropdown-link:hover {
+  background: rgba(255, 107, 53, 0.1);
+  color: var(--white-pure);
+}
+
+/* ========== Language Toggle ========== */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+}
+
+.lang-btn {
+  cursor: pointer;
+  color: var(--white-muted);
+  transition: var(--transition-fast);
+  user-select: none;
+}
+
+.lang-btn:hover {
+  color: var(--white-pure);
+}
+
+.lang-btn.active {
+  color: var(--orange-vibrant);
+  font-weight: var(--font-semibold);
+}
+
+.lang-divider {
+  color: var(--white-muted);
+}
+
 /* ========== Buttons ========== */
 .btn {
   display: inline-flex;
@@ -201,6 +270,72 @@
   border: 1px solid var(--gray-dark);
   border-radius: 12px;
   position: relative;
+}
+
+/* Mute Button */
+.mute-btn {
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.mute-btn:hover {
+  background: rgba(255, 107, 53, 0.3);
+  border-color: var(--orange-vibrant);
+  transform: scale(1.1);
+}
+
+.mute-btn svg {
+  width: 22px;
+  height: 22px;
+  color: var(--white-pure);
+}
+
+.mute-icon {
+  display: block;
+}
+
+.sound-icon {
+  display: none;
+}
+
+.mute-btn.sound-on .mute-icon {
+  display: none;
+}
+
+.mute-btn.sound-on .sound-icon {
+  display: block;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.mute-btn.spinning {
+  animation: spin 0.4s ease-in-out;
+}
+
+.mute-btn.sound-on .sound-icon {
+  display: block;
+  animation: soundWave 1.5s ease-in-out infinite;
+}
+
+@keyframes soundWave {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
 }
 
 .hero-scroll-icon::before {

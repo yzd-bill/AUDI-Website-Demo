@@ -21,11 +21,25 @@
 
   <!-- Navigation -->
   <nav class="nav">
-    <a href="#" class="nav-logo">BIU<span>BIU</span></a>
+    <a href="#home" class="nav-logo">BIU<span>BIU</span></a>
     <ul class="nav-links">
-      <li><a href="#models" class="nav-link">车型</a></li>
-      <li><a href="#philosophy" class="nav-link">关于</a></li>
+      <li class="nav-item-dropdown">
+        <a href="#" class="nav-link" data-i18n="nav-models">车型</a>
+        <div class="dropdown-menu">
+          <a href="detail.html?type=sports" class="dropdown-link" data-i18n="tab-sports">跑车</a>
+          <a href="detail.html?type=sedan" class="dropdown-link" data-i18n="tab-sedan">轿车</a>
+          <a href="detail.html?type=suv" class="dropdown-link" data-i18n="tab-suv">SUV</a>
+          <a href="detail.html?type=electric" class="dropdown-link" data-i18n="tab-electric">纯电</a>
+          <a href="detail.html?type=f1" class="dropdown-link" data-i18n="tab-f1">F1</a>
+        </div>
+      </li>
+      <li><a href="#philosophy" class="nav-link" data-i18n="nav-about">关于</a></li>
     </ul>
+    <div class="lang-toggle">
+      <span class="lang-btn active" data-lang="zh">CN</span>
+      <span class="lang-divider">|</span>
+      <span class="lang-btn" data-lang="en">EN</span>
+    </div>
   </nav>
 
   <!-- Hero Section -->
@@ -33,25 +47,37 @@
     <video class="hero-video" autoplay muted loop playsinline>
       <source src="assets/videos/background.mp4" type="video/mp4">
     </video>
+    <button class="mute-btn" id="muteBtn" aria-label="静音切换">
+      <svg class="mute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+      <svg class="sound-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+    </button>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">AUDI</h1>
-      <p class="hero-subtitle">驾驭未来的极致美学</p>
+      <p class="hero-subtitle" data-i18n="hero-subtitle">驾驭未来的极致美学</p>
       <div class="hero-cta">
-        <a href="#models" class="btn btn-primary">探索车型</a>
+        <a href="#models" class="btn btn-primary" data-i18n="hero-cta">探索车型</a>
       </div>
     </div>
     <div class="hero-scroll">
       <div class="hero-scroll-icon"></div>
-      <span>向下滚动</span>
+      <span data-i18n="scroll-text">向下滚动</span>
     </div>
   </section>
 
   <!-- Philosophy Section -->
   <section class="philosophy" id="philosophy">
     <div class="container">
-      <h2 class="philosophy-title animate-on-scroll">重新定义驾驶</h2>
-      <p class="philosophy-text animate-on-scroll stagger-1">
+      <h2 class="philosophy-title animate-on-scroll" data-i18n="philosophy-title">重新定义驾驶</h2>
+      <p class="philosophy-text animate-on-scroll stagger-1" data-i18n="philosophy-text">
         我们相信，真正的驾驶乐趣源于科技与艺术的完美融合。
         每一辆 AUDI 都是对未来出行的大胆想象——
         极致的性能、环保的理念、智能的交互，
@@ -65,16 +91,16 @@
   <section class="models" id="models">
     <div class="container">
       <div class="models-header">
-        <h2 class="models-title animate-on-scroll">车型系列</h2>
+        <h2 class="models-title animate-on-scroll" data-i18n="models-title">车型系列</h2>
       </div>
 
       <!-- 分类切换 Tab -->
       <div class="category-tabs">
-        <button class="category-tab active" data-category="sports">跑车</button>
-        <button class="category-tab" data-category="sedan">轿车</button>
-        <button class="category-tab" data-category="suv">SUV</button>
-        <button class="category-tab" data-category="electric">纯电</button>
-        <button class="category-tab" data-category="f1">F1</button>
+        <button class="category-tab active" data-category="sports" data-i18n="tab-sports">跑车</button>
+        <button class="category-tab" data-category="sedan" data-i18n="tab-sedan">轿车</button>
+        <button class="category-tab" data-category="suv" data-i18n="tab-suv">SUV</button>
+        <button class="category-tab" data-category="electric" data-i18n="tab-electric">纯电</button>
+        <button class="category-tab" data-category="f1" data-i18n="tab-f1">F1</button>
       </div>
 
       <!-- 跑车分类 -->
@@ -94,16 +120,16 @@
             </div>
           </div>
           <div class="category-card-info">
-            <h3 class="category-card-title">AUDI 跑车系列</h3>
-            <p class="category-card-desc">极速超跑 · 赛道基因</p>
-            <p class="category-card-text">极致性能与环保理念的完美融合，专为追求速度与激情的驾驶者打造。</p>
+            <h3 class="category-card-title" data-i18n="card-sports-title">AUDI 跑车系列</h3>
+            <p class="category-card-desc" data-i18n="card-sports-desc">极速超跑 · 赛道基因</p>
+            <p class="category-card-text" data-i18n="card-sports-text">极致性能与环保理念的完美融合，专为追求速度与激情的驾驶者打造。</p>
             <div class="category-bottom">
               <div class="category-keywords">
-                <span>速度与激情</span>
+                <span data-i18n="keyword-speed">速度与激情</span>
               </div>
-              <a href="#" class="explore-more">
-                Explore More
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <a href="detail.html?type=sports&id=rs7" class="explore-more" data-i18n="explore-more">
+                了解更多
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </a>
@@ -119,16 +145,16 @@
             <img src="assets/images/轿车/轿车封面图.jpg" alt="AUDI 轿车">
           </div>
           <div class="category-card-info">
-            <h3 class="category-card-title">AUDI 轿车系列</h3>
-            <p class="category-card-desc">智能豪华 · 行政级座驾</p>
-            <p class="category-card-text">智能豪华与行政级舒适的典范，为追求品质生活的精英人士倾力呈现。</p>
+            <h3 class="category-card-title" data-i18n="card-sedan-title">AUDI 轿车系列</h3>
+            <p class="category-card-desc" data-i18n="card-sedan-desc">智能豪华 · 行政级座驾</p>
+            <p class="category-card-text" data-i18n="card-sedan-text">智能豪华与行政级舒适的典范，为追求品质生活的精英人士倾力呈现。</p>
             <div class="category-bottom">
               <div class="category-keywords">
-                <span>城市</span><span>商务</span><span>家庭</span>
+                <span data-i18n="keyword-city">城市</span><span data-i18n="keyword-business">商务</span><span data-i18n="keyword-family">家庭</span>
               </div>
-              <a href="#" class="explore-more">
-                Explore More
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <a href="detail.html?type=sedan&id=a4" class="explore-more" data-i18n="explore-more">
+                了解更多
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </a>
@@ -144,16 +170,16 @@
             <img src="assets/images/SUV/SUV封面图.jpg" alt="AUDI SUV">
           </div>
           <div class="category-card-info">
-            <h3 class="category-card-title">AUDI SUV 系列</h3>
-            <p class="category-card-desc">全地形驾驭 · 豪华空间</p>
-            <p class="category-card-text">全地形驾驭能力与豪华空间的完美结合，满足探索未知的渴望。</p>
+            <h3 class="category-card-title" data-i18n="card-suv-title">AUDI SUV 系列</h3>
+            <p class="category-card-desc" data-i18n="card-suv-desc">全地形驾驭 · 豪华空间</p>
+            <p class="category-card-text" data-i18n="card-suv-text">全地形驾驭能力与豪华空间的完美结合，满足探索未知的渴望。</p>
             <div class="category-bottom">
               <div class="category-keywords">
-                <span>探索</span><span>家庭</span><span>越野</span>
+                <span data-i18n="keyword-explore">探索</span><span data-i18n="keyword-family">家庭</span><span data-i18n="keyword-offroad">越野</span>
               </div>
-              <a href="#" class="explore-more">
-                Explore More
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <a href="detail.html?type=suv&id=q5" class="explore-more" data-i18n="explore-more">
+                了解更多
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </a>
@@ -169,16 +195,16 @@
             <img src="assets/images/电车/电车封面图.jpg" alt="AUDI 纯电">
           </div>
           <div class="category-card-info">
-            <h3 class="category-card-title">AUDI e-tron</h3>
-            <p class="category-card-desc">零排放 · 可持续未来</p>
-            <p class="category-card-text">零排放出行新纪元，以创新科技引领可持续未来驾驶体验。</p>
+            <h3 class="category-card-title" data-i18n="card-electric-title">AUDI e-tron</h3>
+            <p class="category-card-desc" data-i18n="card-electric-desc">零排放 · 可持续未来</p>
+            <p class="category-card-text" data-i18n="card-electric-text">零排放出行新纪元，以创新科技引领可持续未来驾驶体验。</p>
             <div class="category-bottom">
               <div class="category-keywords">
-                <span>环保</span><span>科技</span><span>未来</span>
+                <span data-i18n="keyword-eco">环保</span><span data-i18n="keyword-tech">科技</span><span data-i18n="keyword-future">未来</span>
               </div>
-              <a href="#" class="explore-more">
-                Explore More
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <a href="detail.html?type=electric&id=etron" class="explore-more" data-i18n="explore-more">
+                了解更多
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </a>
@@ -194,16 +220,16 @@
             <img src="assets/images/F1/F1封面图.jpg" alt="AUDI F1">
           </div>
           <div class="category-card-info">
-            <h3 class="category-card-title">AUDI F1</h3>
-            <p class="category-card-desc">赛道科技 · 民用化极致之作</p>
-            <p class="category-card-text">赛道科技民用化的极致之作，将赛车基因融入日常驾驶。</p>
+            <h3 class="category-card-title" data-i18n="card-f1-title">AUDI F1</h3>
+            <p class="category-card-desc" data-i18n="card-f1-desc">赛道科技 · 民用化极致之作</p>
+            <p class="category-card-text" data-i18n="card-f1-text">赛道科技民用化的极致之作，将赛车基因融入日常驾驶。</p>
             <div class="category-bottom">
               <div class="category-keywords">
-                <span>赛道</span><span>极速</span><span>性能</span>
+                <span data-i18n="keyword-track">赛道</span><span data-i18n="keyword-speed">极速</span><span data-i18n="keyword-performance">性能</span>
               </div>
-              <a href="#" class="explore-more">
-                Explore More
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <a href="detail.html?type=f1&id=f1car" class="explore-more" data-i18n="explore-more">
+                了解更多
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </a>
@@ -219,10 +245,10 @@
     <div class="footer-content">
       <div class="footer-logo">BIU<span>BIU</span></div>
       <ul class="footer-links">
-        <li><a href="#" class="footer-link">隐私政策</a></li>
-        <li><a href="#" class="footer-link">使用条款</a></li>
-        <li><a href="#" class="footer-link">联系我们</a></li>
-        <li><a href="#" class="footer-link">加入我们</a></li>
+        <li><a href="#" class="footer-link" data-i18n="footer-privacy">隐私政策</a></li>
+        <li><a href="#" class="footer-link" data-i18n="footer-terms">使用条款</a></li>
+        <li><a href="#" class="footer-link" data-i18n="footer-contact">联系我们</a></li>
+        <li><a href="#" class="footer-link" data-i18n="footer-join">加入我们</a></li>
       </ul>
       <div class="footer-social">
         <a href="#" aria-label="微信">
@@ -243,7 +269,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 AUDI Motors. All rights reserved. 京ICP备XXXXXXXX号</p>
+      <p data-i18n="copyright">&copy; 2026 AUDI Motors. All rights reserved. 京ICP备XXXXXXXX号</p>
     </div>
   </footer>
 

@@ -1,40 +1,46 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with this repository.
 
 ## 项目概述
 
-一个 AUDI 汽车品牌展示网站（AUDI Motors），单页静态网站，使用原生 HTML/CSS/JS 构建。
+AUDI 汽车品牌展示网站，双页面静态网站，使用原生 HTML/CSS/JS 构建。
+
+## 页面结构
+
+- **index.html** - 首页，包含英雄区、车型分类 Tab 展示和轮播
+- **detail.html** - 车型详情页，支持多视图切换和参数展示
 
 ## 目录结构
 
 ```
-├── index.html          # 主页面
+├── index.html          # 首页
+├── detail.html         # 车型详情页
 ├── css/
 │   ├── variables.css   # CSS 变量（颜色、字体、间距、过渡）
-│   ├── base.css         # 基础样式
-│   ├── components.css   # 组件样式（导航、英雄区、车型卡片等）
-│   └── animations.css   # 动画定义
+│   ├── base.css        # 基础样式
+│   ├── components.css  # 组件样式（导航、英雄区、车型卡片等）
+│   ├── animations.css  # 动画定义
+│   └── detail.css      # 详情页样式
 ├── js/
-│   └── main.js          # 交互逻辑（轮播、Tab 切换、滚动动画）
+│   ├── main.js         # 交互逻辑（i18n、轮播、Tab 切换、滚动动画）
+│   ├── detail.js       # 详情页交互（视图切换、横向滚动选择）
+│   └── models-data.js  # 车型数据（分类、参数、图片路径）
 └── assets/
-    ├── videos/
-    │   └── background.mp4  # 英雄区背景视频
+    ├── videos/background.mp4
     └── images/
-        ├── 跑车/RS7/       # 跑车系列图片
-        ├── 轿车/            # 轿车系列图片
-        ├── SUV/             # SUV 系列图片
-        ├── 电车/             # 纯电系列图片
-        └── F1/               # F1 系列图片
+        ├── 跑车/RS7/, R8/
+        ├── 轿车/, SUV/, 电车/, F1/
+        └── placeholder/  # 占位图
 ```
 
 ## 技术栈
 
-- **HTML5** - 单页应用，语义化标签
+- **HTML5** - 语义化标签
 - **CSS3** - CSS Variables、Flexbox、Grid、动画
-- **Vanilla JavaScript** - 无框架，原生 DOM 操作
+- **Vanilla JavaScript** - 原生 DOM 操作
 - **字体** - Google Fonts (Inter)
-- **图片** - 直接引用 JPG/PNG，无压缩处理
+- **图片** - 直接引用 JPG/PNG
 
 ## 设计系统
 
@@ -42,20 +48,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **强调色** - 橙色 (#ff6b35)
 - **字体** - Inter (字重 100-900)
 
-## 常用命令
-
-网站为纯静态文件，直接用浏览器打开 `index.html` 即可预览。
-
 ## 关键实现
 
-### 滚动动画
-使用 `IntersectionObserver` 监听 `.animate-on-scroll` 元素，进入视口时添加 `visible` 类触发 CSS 动画。
+### 双页架构
+- 首页通过 URL 参数跳转详情页：`detail.html?type=sports&id=rs7`
+- 详情页通过 `models-data.js` 动态加载车型数据
 
-### 车型分类 Tab
-通过 `data-category` 属性切换内容区，`initCarousel()` 初始化各分类的图片轮播。
+### 国际化 (i18n)
+- 使用 `data-i18n` 属性标记需翻译元素
+- 翻译对象定义在 `main.js` 的 `translations` 中
+- 语言偏好存储在 `localStorage`
+
+### 滚动动画
+- 使用 `IntersectionObserver` 监听 `.animate-on-scroll`
+- 进入视口时添加 `visible` 类触发 CSS 动画
 
 ### 图片轮播
-原生 JS 实现，支持左右箭头切换和 dot 导航，单图片时隐藏导航控件。
+- 原生 JS 实现，支持左右箭头和 dot 导航
+- 单图片时自动隐藏导航控件
 
-### 视频路径
-背景视频位于 `assets/videos/background.mp4`，在 `index.html` 第 34 行引用。
+### 详情页交互
+- 横向滚轮/触摸滑动切换车型
+- 视图按钮切换前/后/侧视图
+- `updateListPosition()` 使选中车型居中
+
+## 常用命令
+
+纯静态文件，直接用浏览器打开 `index.html` 即可预览。

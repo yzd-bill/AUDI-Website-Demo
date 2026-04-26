@@ -3,7 +3,22 @@
     "allow": [
       "Bash(npx serve *)",
       "mcp__plugin_playwright_playwright__browser_navigate",
-      "Read(//c/Users/biubiubill/Videos/**)"
+      "Read(//c/Users/biubiubill/Videos/**)",
+      "Bash(python -m http.server 8080)",
+      "WebFetch(domain:minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com)",
+      "mcp__ide__executeCode",
+      "Bash(npx playwright *)",
+      "Bash(python -m http.server 8000)",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_network_requests",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "mcp__plugin_playwright_playwright__browser_run_code",
+      "mcp__plugin_playwright_playwright__browser_tabs",
+      "Bash(node -c js/detail.js)"
     ]
   }
 }

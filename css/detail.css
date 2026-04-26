@@ -1,0 +1,273 @@
+/* 车型详情页样式 */
+
+/* 主容器 */
+.model-detail {
+  min-height: 100vh;
+  padding-top: 80px;
+  background: #0a0a0a;
+}
+
+/* ========== 1. 车型选择器（首尾相连横向列表） ========== */
+.model-selector {
+  position: relative;
+  padding: 40px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.model-list-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.model-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.model-list {
+  display: inline-block;
+  padding: 1em 25%;
+  will-change: scroll;
+}
+
+.model-name {
+  display: inline-block;
+  font-size: 28px;
+  color: #555;
+  white-space: nowrap;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  padding: 20px 40px;
+}
+
+.model-name:hover {
+  color: #888;
+}
+
+.model-name.active {
+  font-size: 64px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* 两边渐变遮罩 */
+.model-list-container::before,
+.model-list-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.model-list-container::before {
+  left: 0;
+  background: linear-gradient(to right, #0a0a0a 0%, transparent 100%);
+}
+
+.model-list-container::after {
+  right: 0;
+  background: linear-gradient(to left, #0a0a0a 0%, transparent 100%);
+}
+
+@media (max-width: 768px) {
+  .model-name.active {
+    font-size: 48px;
+  }
+
+  .model-name {
+    font-size: 22px;
+    padding: 16px 28px;
+  }
+
+  .model-list-container {
+    padding: 0 40px;
+  }
+
+  .model-list-container::before,
+  .model-list-container::after {
+    width: 40px;
+  }
+}
+
+
+/* ========== 2. 3D模型展示区 ========== */
+.model-viewer {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.view-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.view-btn {
+  padding: 10px 24px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #888;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+  border-color: #ff6b35;
+  color: #fff;
+}
+
+.view-btn.active {
+  background: #ff6b35;
+  border-color: #ff6b35;
+  color: #fff;
+}
+
+.model-image-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.model-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.model-image.loaded {
+  opacity: 1;
+}
+
+.model-background-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(100px, 20vw, 280px);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+.model-image-placeholder {
+  color: #444;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* ========== 3. 参数展示区 ========== */
+.model-specs {
+  padding: 60px 20px 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.specs-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.spec-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 28px 20px;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.spec-item:hover {
+  background: rgba(255, 107, 53, 0.08);
+  border-color: rgba(255, 107, 53, 0.3);
+  transform: translateY(-4px);
+}
+
+.spec-label {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.spec-value {
+  display: block;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ========== 响应式调整 ========== */
+@media (max-width: 768px) {
+  .model-name.active {
+    font-size: 22px;
+  }
+
+  .model-list {
+    gap: 32px;
+  }
+
+  .view-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .specs-title {
+    font-size: 24px;
+  }
+
+  .spec-value {
+    font-size: 18px;
+  }
+}

@@ -5,6 +5,105 @@ const animatedElements = document.querySelectorAll('.animate-on-scroll');
 const statValues = document.querySelectorAll('.stat-value');
 const counters = document.querySelectorAll('[data-counter]');
 
+// ========== Mute Button ==========
+const muteBtn = document.getElementById('muteBtn');
+const heroVideo = document.querySelector('.hero-video');
+
+if (muteBtn && heroVideo) {
+  let isSpinning = false;
+
+  muteBtn.addEventListener('click', () => {
+    if (isSpinning) return;
+    isSpinning = true;
+
+    muteBtn.classList.add('spinning');
+    setTimeout(() => muteBtn.classList.remove('spinning'), 400);
+
+    if (heroVideo.muted) {
+      heroVideo.muted = false;
+      muteBtn.classList.add('sound-on');
+    } else {
+      heroVideo.muted = true;
+      muteBtn.classList.remove('sound-on');
+    }
+
+    setTimeout(() => {
+      isSpinning = false;
+    }, 400);
+  });
+}
+
+// ========== Language Toggle ==========
+const translations = {
+  'nav-models': { zh: '车型', en: 'Models' },
+  'nav-about': { zh: '关于', en: 'About' },
+  'hero-subtitle': { zh: '驾驭未来的极致美学', en: 'The Ultimate Aesthetic of Future Driving' },
+  'hero-cta': { zh: '探索车型', en: 'Explore Models' },
+  'scroll-text': { zh: '向下滚动', en: 'Scroll Down' },
+  'philosophy-title': { zh: '重新定义驾驶', en: 'Redefining Driving' },
+  'philosophy-text': { zh: '我们相信，真正的驾驶乐趣源于科技与艺术的完美融合。每一辆 AUDI 都是对未来出行的大胆想象——极致的性能、环保的理念、智能的交互，在这里，每一个细节都为驾驭者而生。', en: 'We believe that true driving pleasure comes from the perfect fusion of technology and art. Every AUDI is a bold imagination of future mobility — extreme performance, eco-friendly philosophy, and intelligent interaction, where every detail is crafted for the driver.' },
+  'models-title': { zh: '车型系列', en: 'Model Series' },
+  'tab-sports': { zh: '跑车', en: 'Sports' },
+  'tab-sedan': { zh: '轿车', en: 'Sedan' },
+  'tab-suv': { zh: 'SUV', en: 'SUV' },
+  'tab-electric': { zh: '纯电', en: 'Electric' },
+  'tab-f1': { zh: 'F1', en: 'F1' },
+  'card-sports-title': { zh: 'AUDI 跑车系列', en: 'AUDI Sports Series' },
+  'card-sports-desc': { zh: '极速超跑 · 赛道基因', en: 'Speed · Track Heritage' },
+  'card-sports-text': { zh: '极致性能与环保理念的完美融合，专为追求速度与激情的驾驶者打造。', en: 'The perfect fusion of extreme performance and eco-friendly philosophy, designed for drivers who pursue speed and passion.' },
+  'card-sedan-title': { zh: 'AUDI 轿车系列', en: 'AUDI Sedan Series' },
+  'card-sedan-desc': { zh: '智能豪华 · 行政级座驾', en: 'Intelligent Luxury · Executive Sedan' },
+  'card-sedan-text': { zh: '智能豪华与行政级舒适的典范，为追求品质生活的精英人士倾力呈现。', en: 'The epitome of intelligent luxury and executive comfort, crafted for elites seeking quality life.' },
+  'card-suv-title': { zh: 'AUDI SUV 系列', en: 'AUDI SUV Series' },
+  'card-suv-desc': { zh: '全地形驾驭 · 豪华空间', en: 'All-Terrain · Luxury Space' },
+  'card-suv-text': { zh: '全地形驾驭能力与豪华空间的完美结合，满足探索未知的渴望。', en: 'The perfect combination of all-terrain capability and luxury space, satisfying the desire to explore the unknown.' },
+  'card-electric-title': { zh: 'AUDI e-tron', en: 'AUDI e-tron' },
+  'card-electric-desc': { zh: '零排放 · 可持续未来', en: 'Zero Emissions · Sustainable Future' },
+  'card-electric-text': { zh: '零排放出行新纪元，以创新科技引领可持续未来驾驶体验。', en: 'A new era of zero-emission mobility, leading sustainable future driving experience with innovative technology.' },
+  'card-f1-title': { zh: 'AUDI F1', en: 'AUDI F1' },
+  'card-f1-desc': { zh: '赛道科技 · 民用化极致之作', en: 'Track Technology · Ultimate Commercialization' },
+  'card-f1-text': { zh: '赛道科技民用化的极致之作，将赛车基因融入日常驾驶。', en: 'The ultimate example of track technology commercialized, integrating racing DNA into daily driving.' },
+  'keyword-speed': { zh: '速度与激情', en: 'Speed & Passion' },
+  'keyword-city': { zh: '城市', en: 'City' },
+  'keyword-business': { zh: '商务', en: 'Business' },
+  'keyword-family': { zh: '家庭', en: 'Family' },
+  'keyword-explore': { zh: '探索', en: 'Explore' },
+  'keyword-offroad': { zh: '越野', en: 'Off-road' },
+  'keyword-eco': { zh: '环保', en: 'Eco' },
+  'keyword-tech': { zh: '科技', en: 'Tech' },
+  'keyword-future': { zh: '未来', en: 'Future' },
+  'keyword-track': { zh: '赛道', en: 'Track' },
+  'keyword-performance': { zh: '性能', en: 'Performance' },
+  'explore-more': { zh: '了解更多', en: 'Explore More' },
+  'footer-privacy': { zh: '隐私政策', en: 'Privacy Policy' },
+  'footer-terms': { zh: '使用条款', en: 'Terms of Use' },
+  'footer-contact': { zh: '联系我们', en: 'Contact Us' },
+  'footer-join': { zh: '加入我们', en: 'Join Us' },
+  'copyright': { zh: '© 2026 AUDI Motors. All rights reserved. 京ICP备XXXXXXXX号', en: '© 2026 AUDI Motors. All rights reserved. ICP Beijing XXXXXXXX' }
+};
+
+function setLanguage(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[key] && translations[key][lang]) {
+      el.textContent = translations[key][lang];
+    }
+  });
+  localStorage.setItem('lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+
+// Initialize language from localStorage
+const savedLang = localStorage.getItem('lang') || 'zh';
+setLanguage(savedLang);
+
+// Bind click events to language buttons
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+});
+
 // ========== Navigation Scroll Effect ==========
 function handleNavScroll() {
   if (window.scrollY > 100) {

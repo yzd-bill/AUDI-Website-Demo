@@ -1,0 +1,5 @@
+[      21ms] ReferenceError: Cannot access 'modelList' before initialization
+    at updateModelListUI (http://localhost:8000/js/detail.js:181:5)
+    at setLanguage (http://localhost:8000/js/detail.js:41:5)
+    at HTMLDocument.<anonymous> (http://localhost:8000/js/detail.js:53:3)
+[      93ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8000/favicon.ico:0
