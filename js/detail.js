@@ -1,5 +1,52 @@
 // 车型详情页交互逻辑
 document.addEventListener('DOMContentLoaded', () => {
+  // ========== 3D 鼠标跟随效果 ==========
+  const modelImageContainer = document.querySelector('.model-image-container');
+  const modelViewer = document.querySelector('.model-viewer');
+
+  if (modelImageContainer && modelViewer) {
+    modelViewer.addEventListener('mousemove', (e) => {
+      const rect = modelImageContainer.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      modelImageContainer.style.transform = `perspective(1000px) rotateY(${x * 8}deg) rotateX(${-y * 5}deg)`;
+    });
+
+    modelViewer.addEventListener('mouseleave', () => {
+      modelImageContainer.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+    });
+  }
+
+  // ========== 数字滚动动画 ==========
+  function animateNumber(element, target, duration = 1000) {
+    const start = 0;
+    const startTime = performance.now();
+    const isFloat = String(target).includes('.');
+    const decimals = isFloat ? String(target).split('.')[1].length : 0;
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = start + (target - start) * easeOut;
+
+      if (isFloat) {
+        element.textContent = current.toFixed(decimals);
+      } else {
+        element.textContent = Math.round(current);
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        element.textContent = isFloat ? target.toFixed(decimals) : target;
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
   // ========== 翻译系统 ==========
   const translations = {
     // 导航栏
@@ -137,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const specsGrid = document.querySelector('.specs-grid');
 
   // 初始化
+  let isFirstLoad = true;
   if (models.length > 0) {
     // 找到当前车型的索引
     if (currentModelId) {
@@ -147,6 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
     renderModelList();
     updateModelDisplay();
     updateListPosition();
+
+    // 触发动画入场
+    setTimeout(() => {
+      document.querySelector('.model-selector')?.classList.add('animate-enter');
+      document.querySelector('.model-viewer')?.classList.add('animate-enter');
+      document.querySelector('.model-specs')?.classList.add('animate-enter');
+    }, 50);
   }
 
   // 初始化语言（需要在 DOM 和 models 初始化之后）
@@ -272,36 +327,58 @@ document.addEventListener('DOMContentLoaded', () => {
       return spec;
     };
 
+    // 解析数值用于动画
+    const parseNumericValue = (val) => {
+      const str = String(val);
+      const match = str.match(/[\d.]+/);
+      return match ? parseFloat(match[0]) : null;
+    };
+
     specsGrid.innerHTML = `
       <div class="spec-item">
         <span class="spec-label" data-i18n="spec-launchDate">${translations['spec-launchDate'][currentLang]}</span>
-        <span class="spec-value">${specValue(model.specs.launchDate)}</span>
+        <span class="spec-value" data-numeric="${parseNumericValue(model.specs.launchDate) || ''}">${specValue(model.specs.launchDate)}</span>
       </div>
       <div class="spec-item">
         <span class="spec-label" data-i18n="spec-topSpeed">${translations['spec-topSpeed'][currentLang]}</span>
-        <span class="spec-value">${specValue(model.specs.topSpeed)}</span>
+        <span class="spec-value" data-numeric="${parseNumericValue(model.specs.topSpeed) || ''}">${specValue(model.specs.topSpeed)}</span>
       </div>
       <div class="spec-item">
         <span class="spec-label" data-i18n="spec-horsepower">${translations['spec-horsepower'][currentLang]}</span>
-        <span class="spec-value">${specValue(model.specs.horsepower)}</span>
+        <span class="spec-value" data-numeric="${parseNumericValue(model.specs.horsepower) || ''}">${specValue(model.specs.horsepower)}</span>
       </div>
       <div class="spec-item">
         <span class="spec-label" data-i18n="spec-torque">${translations['spec-torque'][currentLang]}</span>
-        <span class="spec-value">${specValue(model.specs.torque)}</span>
+        <span class="spec-value" data-numeric="${parseNumericValue(model.specs.torque) || ''}">${specValue(model.specs.torque)}</span>
       </div>
       <div class="spec-item">
         <span class="spec-label" data-i18n="spec-acceleration">${translations['spec-acceleration'][currentLang]}</span>
-        <span class="spec-value">${specValue(model.specs.acceleration)}</span>
+        <span class="spec-value" data-numeric="${parseNumericValue(model.specs.acceleration) || ''}">${specValue(model.specs.acceleration)}</span>
       </div>
       <div class="spec-item">
         <span class="spec-label" data-i18n="spec-seating">${translations['spec-seating'][currentLang]}</span>
-        <span class="spec-value">${specValue(model.specs.seating)}</span>
+        <span class="spec-value" data-numeric="${parseNumericValue(model.specs.seating) || ''}">${specValue(model.specs.seating)}</span>
       </div>
       <div class="spec-item">
         <span class="spec-label" data-i18n="spec-dimensions">${translations['spec-dimensions'][currentLang]}</span>
-        <span class="spec-value">${specValue(model.specs.dimensions)}</span>
+        <span class="spec-value" data-numeric="">${specValue(model.specs.dimensions)}</span>
       </div>
     `;
+
+    // 为数值应用滚动动画（仅首次加载时）
+    if (isFirstLoad) {
+      setTimeout(() => {
+        specsGrid.querySelectorAll('.spec-value[data-numeric]').forEach((el, index) => {
+          const numValue = el.dataset.numeric;
+          if (numValue !== '') {
+            setTimeout(() => {
+              animateNumber(el, parseFloat(numValue), 800);
+            }, index * 100);
+          }
+        });
+        isFirstLoad = false;
+      }, 300);
+    }
   }
 
   // 更新 URL 参数

@@ -7,6 +7,36 @@
   background: #0a0a0a;
 }
 
+/* 页面入场动画 */
+.model-selector.animate-enter {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: page-enter 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s forwards;
+}
+
+.model-viewer.animate-enter {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: page-enter 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s forwards;
+}
+
+.model-specs.animate-enter {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: page-enter 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.8s forwards;
+}
+
+@keyframes page-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ========== 1. 车型选择器（首尾相连横向列表） ========== */
 .model-selector {
   position: relative;
@@ -45,16 +75,73 @@
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   cursor: pointer;
   padding: 20px 40px;
+  position: relative;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.model-name::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .model-name:hover {
   color: #888;
 }
 
+.model-name:hover::before {
+  opacity: 1;
+}
+
 .model-name.active {
   font-size: 64px;
   font-weight: 700;
   color: #fff;
+  text-shadow: 0 0 40px rgba(255, 107, 53, 0.5);
+  animation: glow-pulse 2s ease-in-out infinite, slide-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.model-name.active::before {
+  opacity: 1;
+  background: rgba(255, 107, 53, 0.08);
+  animation: glow-border 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 40px rgba(255, 107, 53, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 60px rgba(255, 107, 53, 0.6), 0 0 80px rgba(255, 107, 53, 0.3);
+  }
+}
+
+@keyframes glow-border {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.2), inset 0 0 20px rgba(255, 107, 53, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 107, 53, 0.4), inset 0 0 30px rgba(255, 107, 53, 0.1);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  60% {
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 /* 两边渐变遮罩 */
@@ -123,6 +210,21 @@
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.view-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 107, 53, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
 }
 
 .view-btn:hover {
@@ -130,10 +232,20 @@
   color: #fff;
 }
 
+.view-btn:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
 .view-btn.active {
   background: #ff6b35;
   border-color: #ff6b35;
   color: #fff;
+}
+
+.view-btn.active::before {
+  width: 0;
+  height: 0;
 }
 
 .model-image-container {
@@ -148,6 +260,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
 }
 
 .model-image {
@@ -155,11 +269,13 @@
   max-height: 100%;
   object-fit: contain;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: scale(0.95);
 }
 
 .model-image.loaded {
   opacity: 1;
+  transform: scale(1);
 }
 
 .model-background-title {
@@ -176,6 +292,18 @@
   text-transform: uppercase;
   letter-spacing: -0.02em;
   user-select: none;
+  animation: title-breathe 4s ease-in-out infinite;
+}
+
+@keyframes title-breathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
 }
 
 .model-image-placeholder {
@@ -223,13 +351,51 @@
   padding: 28px 20px;
   border-radius: 16px;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.spec-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.spec-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), transparent 50%, rgba(255, 107, 53, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .spec-item:hover {
   background: rgba(255, 107, 53, 0.08);
   border-color: rgba(255, 107, 53, 0.3);
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 107, 53, 0.1);
+}
+
+.spec-item:hover::before {
+  left: 100%;
+}
+
+.spec-item:hover::after {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.6), transparent 50%, rgba(255, 107, 53, 0.6));
 }
 
 .spec-label {
@@ -239,6 +405,7 @@
   margin-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
 .spec-value {
@@ -246,6 +413,41 @@
   font-size: 22px;
   font-weight: 600;
   color: #fff;
+  transition: all 0.3s ease;
+}
+
+.spec-item:hover .spec-label {
+  color: #ff6b35;
+}
+
+.spec-item:hover .spec-value {
+  color: #ff6b35;
+  text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+}
+
+/* 交错入场动画 */
+.spec-item {
+  opacity: 0;
+  animation: spec-item-enter 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.spec-item:nth-child(1) { animation-delay: 0.1s; }
+.spec-item:nth-child(2) { animation-delay: 0.15s; }
+.spec-item:nth-child(3) { animation-delay: 0.2s; }
+.spec-item:nth-child(4) { animation-delay: 0.25s; }
+.spec-item:nth-child(5) { animation-delay: 0.3s; }
+.spec-item:nth-child(6) { animation-delay: 0.35s; }
+.spec-item:nth-child(7) { animation-delay: 0.4s; }
+
+@keyframes spec-item-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* ========== 响应式调整 ========== */

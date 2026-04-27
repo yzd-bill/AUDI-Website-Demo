@@ -18,7 +18,9 @@
       "mcp__plugin_playwright_playwright__browser_close",
       "mcp__plugin_playwright_playwright__browser_run_code",
       "mcp__plugin_playwright_playwright__browser_tabs",
-      "Bash(node -c js/detail.js)"
+      "Bash(node -c js/detail.js)",
+      "Bash(npx -y http-server -p 8080)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/detail.html)"
     ]
   }
 }
